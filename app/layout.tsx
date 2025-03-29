@@ -4,6 +4,7 @@ import { Josefin_Sans, Raleway } from 'next/font/google';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import CursorEffects from '@/components/CursorEffects';
 
 // Load Raleway for body text (applied to <body>)
 const raleway = Raleway({ subsets: ['latin'] });
@@ -27,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${raleway.className} ${josefinSans.variable}`}>
+      <CursorEffects />
         <TooltipProvider>
           <ThemeProvider
             attribute="class"
