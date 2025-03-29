@@ -19,9 +19,29 @@ export function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-sm z-40 border-b">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold">
-            Portfolio
+        <div className="flex items-center justify-center h-16">
+          <Link
+            href="#contact"
+            className="group relative flex flex-col items-center"
+          >
+            {/* Circular Logo Image */}
+            <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+              {/* Replace with your actual image */}
+              <img
+                src="https://th.bing.com/th/id/R.9a17709da8ebcfc618805e435cab07e4?rik=bFf1peV980nV4Q&pid=ImgRaw&r=0"
+                alt="Portfolio Logo"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Online Indicator (Green Dot) */}
+            <div className="relative -mt-3 ml-6">
+              <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+              {/* Hidden "Online" text that appears on hover */}
+              <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                Online - Click to contact
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

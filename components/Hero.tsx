@@ -19,29 +19,75 @@ export default function Hero() {
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 to-transparent rounded-2xl"></div>
+        <div className="absolute inset-0 bg-background/80 rounded-2xl"></div>
       </div>
 
       {/* Content */}
       <div className="relative h-full flex items-center justify-center md:justify-start px-6 lg:px-8">
-        <motion.div
-          ref={ref} // Attach the ref
-          initial={{ opacity: 0, x: -60 }} // Start off-screen to the left
-          animate={isInView ? { opacity: 1, x: 0 } : {}} // Animate when in view
-          transition={{ duration: 0.9, delay: 0.9, ease: "easeOut" }} // Smooth easing
-          className=" p-8 rounded-2xl shadow-lg md:ml-32 lg:w-1/2 text-center md:text-left"
-        >
-          <h1 className="text-4xl font-bold text-white mb-4">Hello</h1>
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-                I am Kennedy Njeru.</h1>
-          <p className="mt-6 text-lg leading-8 text-white/80">
-            I tell websites what to do.<span className="text-blue-400"> Do they listen?</span> Well, sometimes they do,
-            sometimes they don&apos;t, but that&apos;s where my magic comes in. I
-            coax those unruly pixels into place and turn caffeine into code.
-          </p>
-          <h1 className="text-4xl font-bold text-white mb-4">Welcome to my digital alchemy...</h1>
-        </motion.div>
-      </div>
+  <motion.div
+    ref={ref}
+    initial={{ opacity: 0, x: -60 }}
+    animate={isInView ? { opacity: 1, x: 0 } : {}}
+    transition={{ duration: 0.9, ease: "easeOut" }}
+    className="p-8 rounded-2xl md:ml-20 lg:w-2/3 text-center md:text-left"
+  >
+    {/* Hello + Wave */}
+    <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
+      <motion.h1 
+        className="text-5xl md:text-6xl font-bold text-white"
+      >
+        Hello
+      </motion.h1>
+      <motion.div
+        animate={isInView ? { 
+          rotate: [0, 14, -8, 14, 0],
+        } : {}}
+        transition={{ 
+          delay: 0.8, 
+          duration: 1.2,
+          repeat: 2,
+          repeatDelay: 1
+        }}
+        className="text-5xl md:text-6xl"
+      >
+        👋
+      </motion.div>
+    </div>
+
+    {/* Name - Simple fade-in */}
+    <motion.h1 
+      className="text-4xl md:text-7xl font-bold text-white mb-4"
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
+      transition={{ delay: 0.4 }}
+    >
+      I am Kennedy Njeru.
+    </motion.h1>
+
+    {/* Tagline - Original text with subtle emphasis */}
+    <motion.p 
+      className="text-xl md:text-3xl leading-relaxed text-white/80 mb-6"
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
+      transition={{ delay: 0.6 }}
+    >
+      I tell websites what to do.{" "}
+      <span className="text-blue-400 font-medium">Do they listen?</span> Well, sometimes they do,
+      sometimes they don&apos;t, but that&apos;s where my magic comes in. I
+      coax those unruly pixels into place and turn caffeine into code.
+    </motion.p>
+
+    {/* Closing line - Minimal animation */}
+    <motion.p 
+      className="text-3xl md:text-4xl font-bold text-white"
+      initial={{ opacity: 0, y: 10 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: 0.8 }}
+    >
+      Welcome to my digital alchemy<span className="text-blue-400"> ...</span>
+    </motion.p>
+  </motion.div>
+</div>
     </div>
   );
 }
