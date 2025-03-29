@@ -23,9 +23,9 @@ export function ViewToggle({ mode, setMode }: ViewToggleProps) {
           onClick={() => setMode(mode === 'adventure' ? 'developer' : 'adventure')}
         >
           {mode === 'adventure' ? (
-            <TerminalIcon className="h-[1.2rem] w-[1.2rem]" />
+            <TerminalIcon className="text-white hover:text-muted-foreground dark:text-muted-foreground dark:hover:text-foreground h-[1.2rem] w-[1.2rem]" />
           ) : (
-            <Compass className="h-[1.2rem] w-[1.2rem]" />
+            <Compass className="text-white hover:text-muted-foreground dark:text-muted-foreground dark:hover:text-foreground h-[1.2rem] w-[1.2rem]" />
           )}
         </Button>
       </TooltipTrigger>

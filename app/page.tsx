@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background">
-      <div className="fixed top-4 right-4 flex gap-2 z-50">
+      <div className="fixed top-3 right-16 md:right-4 flex gap-2 z-50">
         <ViewToggle mode={mode} setMode={setMode} />
         <ModeToggle />
       </div>

@@ -19,7 +19,7 @@ export default function Hero() {
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-background/80 rounded-2xl"></div>
+        <div className="absolute inset-0 bg-[#000d14]/80 rounded-2xl"></div>
       </div>
 
       {/* Content */}
