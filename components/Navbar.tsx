@@ -35,7 +35,7 @@ export function Navbar() {
                 {/* Circular Logo Image */}
                 <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
                   <img
-                    src="https://th.bing.com/th/id/R.9a17709da8ebcfc618805e435cab07e4?rik=bFf1peV980nV4Q&pid=ImgRaw&r=0"
+                    src="/kennedy.jpeg"
                     alt="Portfolio Logo"
                     className="w-full h-full object-cover"
                   />
@@ -67,9 +67,9 @@ export function Navbar() {
 
           {/* Mobile Navigation Button */}
           <Button
-            variant="ghost"
+          variant="outline"
             size="icon"
-            className="md:hidden"
+            className="mr-2 text-white hover:text-muted-foreground dark:text-muted-foreground dark:hover:text-foreground transition-colors md:hidden"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X /> : <Menu />}
