@@ -10,16 +10,16 @@ export default function Hero() {
   const isInView = useInView(ref, { once: true }); // Trigger animation only once
 
   return (
-    <div className="relative h-[95vh] overflow-hidden">
+    <div className="relative h-[95vh] overflow-hidden ">
       {/* Background Image */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 ">
         <Image
           src="https://th.bing.com/th/id/R.9a17709da8ebcfc618805e435cab07e4?rik=bFf1peV980nV4Q&pid=ImgRaw&r=0" // Online image URL
           alt="Batman"
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-[#000d14]/80 rounded-2xl"></div>
+        <div className="absolute inset-0 bg-[#000d14]/80"></div>
       </div>
 
       {/* Content */}
