@@ -1,100 +1,215 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 export function Contact() {
   const [message, setMessage] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
+  const [email, setEmail] = useState("");
+  const [displayText, setDisplayText] = useState("> Type your message and hit Transmit...");
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState("");
+  const [currentSong, setCurrentSong] = useState<string | null>(null);
+  const [progress, setProgress] = useState(0);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-  const contacts = [
-    { platform: "Email", link: "mailto:your.email@example.com", icon: <Mail className="w-6 h-6" /> },
-    { platform: "GitHub", link: "https://github.com/yourusername", icon: <Github className="w-6 h-6" /> },
-    { platform: "LinkedIn", link: "https://linkedin.com/in/yourusername", icon: <Linkedin className="w-6 h-6" /> },
-    { platform: "Twitter", link: "https://twitter.com/yourusername", icon: <Twitter className="w-6 h-6" /> },
+  const songs = [
+    { src: "/playlist/track1.mp3", duration: "5:01" }, // "Coffee Break"
+    { src: "https://cdn.pixabay.com/audio/2022/03/15/audio_5e5b6e5b-8e5b-4e5b-8e5b-6e5b6e5b6e5b.mp3", duration: "5:01" }, // "Late Night Coding"
+    { src: "https://cdn.pixabay.com/audio/2023/01/12/audio_7e5b6e5b-8e5b-4e5b-8e5b-6e5b6e5b6e5b.mp3", duration: "2:30" }, // "Tech Beat"
+    { src: "https://cdn.pixabay.com/audio/2022/08/02/audio_8e5b6e5b-8e5b-4e5b-8e5b-6e5b6e5b6e5b.mp3", duration: "1:55" }, // "Chill Vibes"
+    { src: "https://cdn.pixabay.com/audio/2023/03/10/audio_9e5b6e5b-8e5b-4e5b-8e5b-6e5b6e5b6e5b.mp3", duration: "2:10" }, // "Neon Drive"
   ];
 
-  const typeMessage = (platform: string, link: string) => {
-    setIsTyping(true);
-    const text = `> Sending transmission to ${platform}: ${link}`;
-    let i = 0;
-    setMessage("");
-    const interval = setInterval(() => {
-      setMessage(text.slice(0, i));
-      i++;
-      if (i > text.length) {
-        clearInterval(interval);
-        setIsTyping(false);
+  const sendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!message.trim() || !email.trim()) {
+      setDisplayText("> Error: Message and email required!");
+      return;
+    }
+
+    setIsSending(true);
+    setDisplayText(`> Transmitting: "${message}" from ${email}...`);
+    playTypeSound();
+
+    const templateParams = {
+      message: message,
+      from_email: email,
+      to_email: "your.email@example.com",
+    };
+
+    try {
+      await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams, "YOUR_PUBLIC_KEY");
+      setDisplayText("> Transmission successful! I'll get back to you soon.");
+      setMessage("");
+      setEmail("");
+      setStatus("success");
+    } catch (error) {
+      setDisplayText("> Transmission failed. Try again or use an alternate channel.");
+      setStatus("error");
+    } finally {
+      setIsSending(false);
+    }
+  };
+
+  const playTypeSound = () => {
+    const audio = new Audio("https://freesound.org/data/previews/256/256451_4003331-lq.mp3"); // Freesound Teletype
+    audio.play();
+  };
+
+  const handleTyping = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+    setDisplayText(`> Typing: "${e.target.value}" from ${email}`);
+    setStatus("");
+  };
+
+  const playSong = (songSrc: string) => {
+    if (currentSong === songSrc) {
+      audioRef.current?.pause();
+      setCurrentSong(null);
+      setProgress(0);
+    } else {
+      setCurrentSong(songSrc);
+      if (audioRef.current) {
+        audioRef.current.src = songSrc;
+        audioRef.current.play();
       }
-    }, 50); // Typing speed
+    }
   };
 
   useEffect(() => {
-    // Initial message
-    setMessage("> Ready to connect? Select a channel...");
-  }, []);
+    if (currentSong && audioRef.current) {
+      const updateProgress = () => {
+        const progress = (audioRef.current!.currentTime / audioRef.current!.duration) * 100;
+        setProgress(progress);
+      };
+      audioRef.current.addEventListener("timeupdate", updateProgress);
+      return () => audioRef.current?.removeEventListener("timeupdate", updateProgress);
+    }
+  }, [currentSong]);
 
   return (
     <section id="contact" className="relative min-h-screen py-20 overflow-hidden">
-      {/* Background Images - Same as About */}
+      {/* Background Images */}
       <div className="absolute inset-0">
         <div className="dark:block hidden">
-          <Image
-            src="/chalkboard.jpg"
-            alt="Technology background"
-            fill
-            className="object-cover"
-            priority
-          />
+          <Image src="/chalkboard.jpg" alt="Technology background" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-[#000d14]/80"></div>
         </div>
         <div className="dark:hidden block">
-          <Image
-            src="/scattered.svg"
-            alt="Technology background"
-            fill
-            className="object-cover"
-            priority
-          />
+          <Image src="/scattered.svg" alt="Technology background" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-white/80"></div>
         </div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10 h-full flex items-center justify-center">
         <motion.div
-          className="w-full max-w-2xl"
+          className="w-full max-w-4xl flex flex-col md:flex-row-reverse gap-8"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-8 text-foreground dark:text-white">
-            Transmit a Signal
-          </h2>
-          <div className="bg-white/90 dark:bg-[#000d14]/50 p-6 rounded-lg shadow-lg border border-blue-400/20 dark:border-blue-400/30">
-            {/* Terminal Display */}
-            <div className="bg-black/80 p-4 rounded-t-lg min-h-[100px] font-mono text-blue-400 dark:text-blue-300 text-lg">
-              <p className={isTyping ? "animate-pulse" : ""}>{message}</p>
-            </div>
-            {/* Contact Buttons */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-white/90 dark:bg-[#000d14]/50 rounded-b-lg">
-              {contacts.map((contact) => (
+          {/* Contact - 2/3 Width on md+ */}
+          <div className="w-full md:w-2/3">
+            <h3 className="text-2xl font-semibold text-center mb-4 text-foreground dark:text-white">
+              Have an idea, a bug to squash, or just want to brew some code together? Drop me a line—I’ll zap back faster than a double espresso shot!
+            </h3>
+            <div className="bg-white/90 dark:bg-[#000d14]/50 p-6 rounded-lg shadow-lg border border-blue-400/20 dark:border-blue-400/30">
+              <div
+                className={`bg-black/80 p-4 rounded-t-lg min-h-[100px] font-mono text-lg ${status === "success"
+                  ? "text-green-400"
+                  : status === "error"
+                    ? "text-red-400"
+                    : "text-blue-400 dark:text-blue-300"
+                  }`}
+              >
+                <p className={isSending ? "animate-pulse" : ""}>{displayText}</p>
+              </div>
+              <form onSubmit={sendMessage} className="p-4 bg-white/90 dark:bg-[#000d14]/50 rounded-b-lg space-y-4">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Your email (for replies)"
+                  className="w-full p-3 bg-transparent border border-blue-400/30 dark:border-blue-400/40 rounded-lg text-foreground dark:text-white placeholder-muted-foreground dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  disabled={isSending}
+                />
+                <input
+                  type="text"
+                  value={message}
+                  onChange={handleTyping}
+                  placeholder="Enter your message here"
+                  className="w-full p-3 bg-transparent border border-blue-400/30 dark:border-blue-400/40 rounded-lg text-foreground dark:text-white placeholder-muted-foreground dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  disabled={isSending}
+                />
                 <motion.button
-                  key={contact.platform}
-                  className="flex items-center justify-center gap-2 p-3 bg-blue-400/10 dark:bg-blue-400/20 rounded-lg hover:bg-blue-400/20 dark:hover:bg-blue-400/30 transition-colors"
-                  onClick={() => typeMessage(contact.platform, contact.link)}
+                  type="submit"
+                  className="w-full p-3 bg-blue-400/20 dark:bg-blue-400/30 text-blue-400 dark:text-blue-300 rounded-lg hover:bg-blue-400/30 dark:hover:bg-blue-400/40 transition-colors disabled:opacity-50"
+                  disabled={isSending}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  {contact.icon}
-                  <span className="text-sm text-foreground dark:text-white">{contact.platform}</span>
+                  {isSending ? "Transmitting..." : "Transmit"}
                 </motion.button>
-              ))}
+              </form>
             </div>
+            <p className="text-center mt-4 text-muted-foreground dark:text-white/80 text-lg">
+              Sending a message? Expect a reply from the Code Alchemist!
+            </p>
           </div>
-          <p className="text-center mt-4 text-muted-foreground dark:text-white/80">
-            Click a channel to beam me a message!
-          </p>
+
+          {/* Playlist - 1/3 Width on md+, Below on Small */}
+          <div className="w-full md:w-1/3 relative">
+            <h3 className="text-2xl font-semibold text-center mb-4 text-foreground dark:text-white">
+              My Caffeine-to-Code Jukebox
+            </h3>
+            <div className="p-4 rounded-lg shadow-lg border border-blue-400/20 dark:border-blue-400/30 bg-transparent">
+              {/* Image banner with text overlay */}
+              <div className="relative w-full h-40 mb-4 overflow-hidden rounded-md">
+                <Image
+                  src="/headphones.jpg"
+                  alt="Headphones banner"
+                  fill
+                  className="object-cover opacity-70"
+                />
+                {/* Dark mode overlay */}
+                <div className="absolute inset-0 bg-black/0 dark:bg-black/40" />
+                {/* Centered text */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <p className="text-sm px-4 py-1 rounded-full bg-white/80 dark:bg-black/80 text-foreground dark:text-white backdrop-blur-sm">
+                    Curious enough?
+                  </p>
+                </div>
+              </div>
+
+              {/* Playlist - unchanged */}
+              <div className="space-y-3">
+                {songs.map((song, index) => (
+                  <div key={index} className="space-y-1">
+                    <motion.button
+                      className={`w-full p-2 text-sm rounded-lg transition-colors flex justify-between items-center ${currentSong === song.src
+                          ? "bg-blue-400/20 dark:bg-blue-400/30 text-blue-400 dark:text-blue-300"
+                          : "bg-blue-400/10 dark:bg-blue-400/20 text-muted-foreground dark:text-white/80 hover:bg-blue-400/20 dark:hover:bg-blue-400/30"
+                        }`}
+                      onClick={() => playSong(song.src)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <span>{`Track ${index + 1}`}</span>
+                      <span>{song.duration}</span>
+                    </motion.button>
+                    {currentSong === song.src && (
+                      <div className="w-full h-1 bg-blue-400/20 rounded-full">
+                        <div className="h-full bg-blue-400 rounded-full" style={{ width: `${progress}%` }}></div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <audio ref={audioRef} />
+          </div>
         </motion.div>
       </div>
     </section>
