@@ -14,6 +14,7 @@ export function Contact() {
   const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
+
   const songs = [
     { src: "/playlist/track1.mp3", duration: "5:01" }, // "Coffee Break"
     { src: "https://cdn.pixabay.com/audio/2022/03/15/audio_5e5b6e5b-8e5b-4e5b-8e5b-6e5b6e5b6e5b.mp3", duration: "5:01" }, // "Late Night Coding"
@@ -64,30 +65,69 @@ export function Contact() {
     setStatus("");
   };
 
+  // Track which song is playing and if it's paused
+  const [playbackState, setPlaybackState] = useState<{
+    currentSong: string | null;
+    isPlaying: boolean;
+  }>({ currentSong: null, isPlaying: false });
+
+
   const playSong = (songSrc: string) => {
-    if (currentSong === songSrc) {
-      audioRef.current?.pause();
-      setCurrentSong(null);
-      setProgress(0);
+    // If clicking the currently playing song
+    if (playbackState.currentSong === songSrc) {
+      if (playbackState.isPlaying) {
+        // Pause if currently playing
+        audioRef.current?.pause();
+        setPlaybackState({ currentSong: songSrc, isPlaying: false });
+      } else {
+        // Play if paused
+        audioRef.current?.play();
+        setPlaybackState({ currentSong: songSrc, isPlaying: true });
+      }
     } else {
-      setCurrentSong(songSrc);
+      // New song selected
       if (audioRef.current) {
         audioRef.current.src = songSrc;
         audioRef.current.play();
+        setPlaybackState({ currentSong: songSrc, isPlaying: true });
       }
     }
   };
 
+  // Clean up audio when component unmounts
   useEffect(() => {
-    if (currentSong && audioRef.current) {
-      const updateProgress = () => {
-        const progress = (audioRef.current!.currentTime / audioRef.current!.duration) * 100;
-        setProgress(progress);
-      };
-      audioRef.current.addEventListener("timeupdate", updateProgress);
-      return () => audioRef.current?.removeEventListener("timeupdate", updateProgress);
-    }
-  }, [currentSong]);
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = ""; // Clear the source
+      }
+    };
+  }, []);
+
+  // Update progress bar
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const updateProgress = () => {
+      const progress = (audio.currentTime / audio.duration) * 100;
+      setProgress(progress);
+    };
+
+    const handleEnded = () => {
+      setPlaybackState({ currentSong: null, isPlaying: false });
+      setProgress(0);
+    };
+
+    audio.addEventListener("timeupdate", updateProgress);
+    audio.addEventListener("ended", handleEnded);
+
+    return () => {
+      audio.removeEventListener("timeupdate", updateProgress);
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, [playbackState.currentSong]);
+
 
   return (
     <section id="contact" className="relative min-h-screen py-20 overflow-hidden">
@@ -183,31 +223,45 @@ export function Contact() {
                 </div>
               </div>
 
-              {/* Playlist - unchanged */}
+              {/* Playlist */}
               <div className="space-y-3">
-                {songs.map((song, index) => (
-                  <div key={index} className="space-y-1">
-                    <motion.button
-                      className={`w-full p-2 text-sm rounded-lg transition-colors flex justify-between items-center ${currentSong === song.src
+                {songs.map((song, index) => {
+                  const isCurrentSong = playbackState.currentSong === song.src;
+                  const isPlaying = isCurrentSong && playbackState.isPlaying;
+
+                  return (
+                    <div key={index} className="space-y-1">
+                      <motion.button
+                        className={`w-full p-2 text-sm rounded-lg transition-colors flex justify-between items-center ${isCurrentSong
                           ? "bg-blue-400/20 dark:bg-blue-400/30 text-blue-400 dark:text-blue-300"
                           : "bg-blue-400/10 dark:bg-blue-400/20 text-muted-foreground dark:text-white/80 hover:bg-blue-400/20 dark:hover:bg-blue-400/30"
-                        }`}
-                      onClick={() => playSong(song.src)}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <span>{`Track ${index + 1}`}</span>
-                      <span>{song.duration}</span>
-                    </motion.button>
-                    {currentSong === song.src && (
-                      <div className="w-full h-1 bg-blue-400/20 rounded-full">
-                        <div className="h-full bg-blue-400 rounded-full" style={{ width: `${progress}%` }}></div>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                          }`}
+                        onClick={() => playSong(song.src)}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <span>{`Track ${index + 1}`}</span>
+                        <div className="flex items-center gap-2">
+                          <span>{song.duration}</span>
+                          {isCurrentSong && (
+                            <span>{isPlaying ? "⏸" : "▶"}</span>
+                          )}
+                        </div>
+                      </motion.button>
+                      {isCurrentSong && (
+                        <div className="w-full h-1 bg-blue-400/20 rounded-full">
+                          <div
+                            className="h-full bg-blue-400 rounded-full"
+                            style={{ width: `${progress}%` }}
+                          ></div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
+            {/* Audio element should be outside the playlist container */}
             <audio ref={audioRef} />
           </div>
         </motion.div>
