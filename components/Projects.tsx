@@ -214,19 +214,31 @@ export function Projects() {
     }, 5000);
   };
   return (
-    <section id="projects" className="relative min-h-screen py-20 overflow-hidden">
+    <section id="projects" className="relative py-20 overflow-hidden">
       {/* Background Images */}
-      <div className="absolute inset-0">
-        <div className="dark:block hidden">
-          <Image src="/chalkboard.jpg" alt="Technology background" fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-[#000d14]/80" />
-        </div>
-        <div className="dark:hidden block">
-          <Image src="/scattered.svg" alt="Technology background" fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-white/80" />
-        </div>
-      </div>
-
+            <div className="absolute inset-0">
+              <div className="dark:block hidden">
+                <Image
+                  src="/chalkboard.jpg"
+                  alt="Technology background"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-[#000d14]/80"></div>
+              </div>
+              <div className="dark:hidden block">
+                <Image
+                  src="/scattered.svg"
+                  alt="Technology background"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-white/80"></div>
+              </div>
+            </div>
+      
 
       <div className="container mx-auto px-4 relative z-10 h-full flex items-center justify-center">
         {!isUnlocked ? (
@@ -236,7 +248,7 @@ export function Projects() {
             transition={{ duration: 0.8 }}
             className="flex flex-col md:flex-row items-center gap-8 max-w-4xl"
           >
-            {/* Replaced Image with Video */}
+            {/* Video */}
             <div className="w-64 h-64 md:w-80 md:h-80 overflow-hidden rounded-lg">
               <video 
                 autoPlay 
@@ -247,6 +259,7 @@ export function Projects() {
               >
                 <source src="/videos/robot.mp4" type="video/mp4" />
               </video>
+             
             </div>
 
             <div className="text-center md:text-left relative">
@@ -282,9 +295,9 @@ export function Projects() {
                   <p className="mt-2">{feedback.message}</p>
                 </motion.div>
               )}
-
+            <p className="text-lg text-muted-foreground dark:text-white/80 mb-4">Want a taste of my creative ventures?</p>
               <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground dark:text-white">
-                Crack the Safe
+                Crack up the Safe
               </h2>
               <p className="text-lg text-muted-foreground dark:text-white/80 mb-4">
                 {questions[questionIndex].text}
@@ -327,7 +340,7 @@ export function Projects() {
             transition={{ duration: 0.8, delay: 0.5 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-foreground dark:text-white">
-              Retro Terminal Showcase
+              My creative Ventures
             </h2>
             <div className="relative">
               <motion.button
