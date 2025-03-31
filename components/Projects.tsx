@@ -120,6 +120,29 @@ export function Projects() {
     }
   };
 
+  const playPassSound = () => {
+    try {
+      // Stop any currently playing audio
+      const existingAudio = document.querySelector('#pass-sound') as HTMLAudioElement;
+      if (existingAudio) {
+        existingAudio.pause();
+        existingAudio.currentTime = 0;
+      }
+  
+      // Create new audio element
+      const audio = new Audio("/sounds/pass.mp3");
+      audio.id = 'pass-sound'; // Give it an ID so we can find it later
+      audio.play().catch(e => console.error("Audio play failed:", e));
+      
+      // Clean up after playback
+      audio.onended = () => {
+        audio.remove();
+      };
+    } catch (e) {
+      console.error("Error playing pass sound:", e);
+    }
+  };
+
   const scrollToIndex = (index: number) => {
     if (index < 0 || index >= projects.length) return;
     setCurrentIndex(index);
@@ -184,7 +207,7 @@ export function Projects() {
     }
     
     setFeedback({ type: "pass", message: joke });
-    playWrongSound();
+    playPassSound();
     setTimeout(() => {
       setQuestionIndex((prev) => (prev + 1) % questions.length);
       setSelectedAnswer(null);
@@ -204,20 +227,6 @@ export function Projects() {
         </div>
       </div>
 
-      {/* Binary Particles */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <motion.span
-            key={i}
-            className="absolute text-blue-400/50 dark:text-blue-300/50 text-sm font-mono"
-            initial={{ x: Math.random() * 100 + "%", y: Math.random() * 100 + "%", opacity: 0 }}
-            animate={{ y: ["-20%", "120%"], opacity: [0, 1, 0] }}
-            transition={{ duration: Math.random() * 5 + 5, repeat: Infinity, delay: Math.random() * 2 }}
-          >
-            {Math.random() > 0.5 ? "0" : "1"}
-          </motion.span>
-        ))}
-      </div>
 
       <div className="container mx-auto px-4 relative z-10 h-full flex items-center justify-center">
         {!isUnlocked ? (
