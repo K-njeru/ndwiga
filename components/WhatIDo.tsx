@@ -16,19 +16,26 @@ export function WhatIDo() {
       title: "Web Development",
       description:
         "Creating seamless web experiences with a blend of creativity and code. From dynamic front-ends to robust back-ends, I bring ideas to life online.",
-      tools: [
-        { name: "React", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" },
-        { name: "Next.js", logo: "https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_dark_background.png" },
-        { name: "Node.js", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" },
-        { name: "TypeScript", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" },
-        { name: "Tailwind CSS", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" },
+        tools: [
+          { name: "React", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" },
+          { name: "Next.js", logo: "https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_dark_background.png" },
+          { name: "Node.js", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" },
+          { name: "TypeScript", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" },
+          { name: "Tailwind CSS", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" },
+          { name: "HTML", logo: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" },
+          { name: "CSS", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" },
+          { name: "JavaScript", logo: "https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" },
+          { name: "Bootstrap", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg" },
+          { name: "MySQL", logo: "https://www.mysql.com/common/logos/logo-mysql-170x115.png" }, 
+          { name: "Supabase", logo: "https://raw.githubusercontent.com/supabase/supabase/master/packages/common/assets/images/supabase-logo-wordmark--dark.svg" }, 
+          { name: "PHP", logo: "https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg" }
       ],
     },
     {
       id: "mobileDev",
       title: "Mobile Development",
       description:
-        "Building cross-platform mobile applications with Flutter. Currently learning to create smooth Android and iOS apps that deliver exceptional user experiences.",
+        "I’m diving into the world of mobile development, learning to create Android and IOS apps that are as smooth as my favorite tunes. The journey is just beginning, but I'm ready to groove through every challenge.",
       tools: [
         { name: "Flutter", logo: "https://storage.googleapis.com/cms-storage-bucket/6a07d8a62f4308d2b854.svg" },
         { name: "Dart", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png" },
@@ -38,11 +45,12 @@ export function WhatIDo() {
       id: "management",
       title: "Project Management & Version Control",
       description:
-        "Balancing project timelines and code versions is like conducting an orchestra—every piece must play in harmony to create a masterpiece.",
+        "Balancing project timelines and code versions is like conducting an orchestra—every piece must play in harmony to create a masterpiece.With these tools, I ensure the melody is always on point.",
       tools: [
         { name: "Git", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Git_icon.svg" },
         { name: "GitHub", logo: "https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" },
         { name: "JIRA", logo: "https://cdn.worldvectorlogo.com/logos/jira-1.svg" },
+        { name: "Zendesk", logo: "https://cdn.worldvectorlogo.com/logos/zendesk-1.svg" }
       ],
     },
   ];
