@@ -130,7 +130,7 @@ export function Contact() {
 
 
   return (
-    <section id="contact" className="relative min-h-screen py-20 overflow-hidden">
+    <section id="contact" className="relative py-20 overflow-hidden">
       {/* Background Images */}
       <div className="absolute inset-0">
         <div className="dark:block hidden">

@@ -11,6 +11,7 @@ import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import { ModeToggle } from '@/components/ModeToggle';
 import { ViewToggle } from '@/components/ViewToggle';
+import { Farewell } from '@/components/Farewell';
 
 export default function Home() {
   const [mode, setMode] = useState<'adventure' | 'developer'>('adventure');
@@ -31,6 +32,7 @@ export default function Home() {
           <WhatIDo />
           <Projects />
           <Contact />
+          <Farewell />
           <Footer />
         </>
       ) : (
