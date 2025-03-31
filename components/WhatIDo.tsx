@@ -142,7 +142,7 @@ export function WhatIDo() {
           >
             <div className="p-6 bg-white/90 dark:bg-[#000d14]/50 rounded-lg shadow-lg border border-blue-400/20 dark:border-blue-400/30 md:sticky md:top-20">
               <h2 className="text-3xl font-bold mb-4 text-foreground dark:text-white">
-                
+                What I Do
               </h2>
               <p className="text-muted-foreground dark:text-white/80 text-lg">
                 I create digital symphonies, turning code into experiences. Whether I’m fixing a bug or
