@@ -32,7 +32,7 @@ export function About() {
       <div className="container mx-auto px-4 relative z-10 h-full">
         <div className="flex flex-col md:flex-row gap-12 h-full">
           {/* Left Column - Real Video with Dark Mode Overlay */}
-          <motion.div 
+          <motion.div
             className="md:w-1/3 flex items-center justify-center"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -62,13 +62,12 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground dark:text-white">
-                Code Alchemist
+                The Rhythm of My Code: A Story Unplugged
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground dark:text-white/80">
-                I transform coffee into clean, efficient code and ideas into interactive experiences. 
-                With 5+ years in the digital crucible, I specialize in React, Next.js, and Node.js 
-                alchemy. My spells include responsive design, state management wizardry, and API 
-                enchantments.
+                My life is a playlist of quirky tunes, a football match with unpredictable twists, and a dance floor where, well,
+                let’s just say my coding skills outshine my rhythm. I code with the precision
+                of an artist, except my music taste is as weird as it gets, and my code is as clean as a well-organized playlist.
               </p>
             </motion.div>
             <motion.div
@@ -77,12 +76,13 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground dark:text-white">
-                Pixel Whisperer
+                Debugging Life: The Unwritten Code
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground dark:text-white/80">
-                I coax unruly interfaces into harmonious user experiences. When browsers misbehave, 
-                I debug with the patience of a monk and the precision of a surgeon. My development 
-                mantra: "Make it work, make it right, make it fast" - in that exact order.
+                My passion for football rivals my passion for debugging, but my moves on the pitch (and the dance floor) are more
+                'debugging in progress.' While I don’t have any plants yet, I’m still nurturing the idea—right after I figure out how to make
+                my favorite tracks the soundtrack of my next coding session. But honestly,
+                you should meet me in person—this portfolio doesn’t quite capture the bugs and dance moves that come with the real deal!
               </p>
             </motion.div>
           </div>
