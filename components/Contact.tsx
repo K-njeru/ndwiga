@@ -16,11 +16,11 @@ export function Contact() {
 
 
   const songs = [
-    { src: "/playlist/track1.mp3", duration: "5:01" }, // "Coffee Break"
-    { src: "https://cdn.pixabay.com/audio/2022/03/15/audio_5e5b6e5b-8e5b-4e5b-8e5b-6e5b6e5b6e5b.mp3", duration: "5:01" }, // "Late Night Coding"
-    { src: "https://cdn.pixabay.com/audio/2023/01/12/audio_7e5b6e5b-8e5b-4e5b-8e5b-6e5b6e5b6e5b.mp3", duration: "2:30" }, // "Tech Beat"
-    { src: "https://cdn.pixabay.com/audio/2022/08/02/audio_8e5b6e5b-8e5b-4e5b-8e5b-6e5b6e5b6e5b.mp3", duration: "1:55" }, // "Chill Vibes"
-    { src: "https://cdn.pixabay.com/audio/2023/03/10/audio_9e5b6e5b-8e5b-4e5b-8e5b-6e5b6e5b6e5b.mp3", duration: "2:10" }, // "Neon Drive"
+    { src: "/playlist/track1.mp3", duration: "3:56" }, // "Coffee Break"
+    { src: "/playlist/track2.webm", duration: "4:28" }, // "Late Night Coding"
+    { src: "/playlist/track3.mp3", duration: "3:55" }, // "Tech Beat"
+    { src: "/playlist/track4.webm", duration: "3:17" }, // "Chill Vibes"
+    { src: "/playlist/track5.mp3", duration: "3:18" }, // "Neon Drive"
   ];
 
   const sendMessage = async (e: React.FormEvent) => {
