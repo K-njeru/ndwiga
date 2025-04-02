@@ -37,45 +37,150 @@ export function Projects() {
   const projects = [
     {
       id: 1,
-      title: "Quantum Dashboard",
-      description: "A tool to track data in real time with a cool, old-school look.",
-      image: "https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406_1280.jpg",
-      stats: { lines: "5,200", coffee: "18 cups", days: "45" },
-      github: "https://github.com/yourusername/quantum-dashboard",
-      website: "https://quantum-dashboard.com",
+      title: "Tattoo Shop",
+      description: "A sleek website for a tattoo parlor with bold designs and smooth navigation.",
+      image: "/crank.png",
+      stackLogos: [
+        {
+          name: "Next.js",
+          logo: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg"
+        },
+        {
+          name: "Tailwind CSS",
+          logo: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg"
+        }
+      ],
+      website: "https://crank-arts.vercel.app/",
+      github: "https://github.com/yourusername/code-telegraph", // Note: This seems misplaced; update if needed
+      stars: 4.5
     },
     {
       id: 2,
-      title: "Pixel Forge",
-      description: "Create pixel art easily with this fun editor.",
-      image: "https://cdn.pixabay.com/photo/2016/11/23/14/37/pixel-1853144_1280.jpg",
-      stats: { lines: "3,800", coffee: "12 cups", days: "30" },
-      website: "https://pixel-forge.app",
+      title: "AM Technologies",
+      description: "A tech-driven site showcasing innovative solutions with a modern edge.",
+      image: "/am.png",
+      stackLogos: [
+        {
+          name: "React",
+          logo: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+        },
+        {
+          name: "HTML5",
+          logo: "https://img.icons8.com/color/48/000000/html-5.png"
+        },
+        {
+          name: "CSS3",
+          logo: "https://img.icons8.com/color/48/000000/css3.png"
+        },
+        {
+          name: "JavaScript",
+          logo: "https://img.icons8.com/color/48/000000/javascript.png"
+        }
+      ],
+      website: "https://k-njeru.github.io/am-tech/",
+      stars: 3.0 // Added based on previous suggestion
     },
     {
       id: 3,
-      title: "Code Telegraph",
-      description: "Send messages with a nod to old-timey communication.",
-      image: "https://cdn.pixabay.com/photo/2016/11/23/14/37/telegraph-1853145_1280.jpg",
-      stats: { lines: "4,500", coffee: "15 cups", days: "60" },
-      github: "https://github.com/yourusername/code-telegraph",
+      title: "Portfolio Website",
+      description: "A personal showcase of skills and projects with a clean, minimalist style.",
+      image: "/kevo.png",
+      stackLogos: [
+        {
+          name: "HTML5",
+          logo: "https://img.icons8.com/color/48/000000/html-5.png"
+        },
+        {
+          name: "CSS3",
+          logo: "https://img.icons8.com/color/48/000000/css3.png"
+        },
+        {
+          name: "JavaScript",
+          logo: "https://img.icons8.com/color/48/000000/javascript.png"
+        }
+      ],
+      website: "https://kelvin-m-njoki.github.io/portfolio/",
+      stars: 3.5 // Added based on previous suggestion
     },
     {
       id: 4,
-      title: "Neon Compiler",
-      description: "A special tool that turns ideas into retro-style code.",
-      image: "https://cdn.pixabay.com/photo/2016/11/19/14/00/neon-1839407_1280.jpg",
-      stats: {
-        coffee: "25 cups",
-        quirk: "Coded in pajamas",
-        victory: "Retro vibes nailed"
-      }
+      title: "Marketing Agency Website",
+      description: "A vibrant site for a marketing agency, blending creativity and functionality.",
+      image: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg",
+      stackLogos: [
+        {
+          name: "HTML5",
+          logo: "https://img.icons8.com/color/48/000000/html-5.png"
+        },
+        {
+          name: "CSS3",
+          logo: "https://img.icons8.com/color/48/000000/css3.png"
+        },
+        {
+          name: "JavaScript",
+          logo: "https://img.icons8.com/color/48/000000/javascript.png"
+        },
+        {
+          name: "Bootstrap",
+          logo: "https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg"
+        },
+        {
+          name: "PHP",
+          logo: "https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg"
+        }
+      ],
+      website: "https://globalleaf.co.ke/",
+      stars: 3.5 // Added based on previous suggestion
+    },
+    {
+      id: 5,
+      title: "Robin",
+      description: "A machine learning agent that assists drivers by identifying road signs via camera and announcing them aloud.",
+      image: "https://cdn.pixabay.com/photo/2017/08/07/14/02/self-driving-2605898_1280.jpg",
+      stackLogos: [
+        {
+          name: "Python",
+          logo: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
+        },
+        {
+          name: "TensorFlow",
+          logo: "https://upload.wikimedia.org/wikipedia/commons/2/2d/Tensorflow_logo.svg"
+        },
+        {
+          name: "OpenCV",
+          logo: "https://upload.wikimedia.org/wikipedia/commons/3/32/OpenCV_Logo_with_text_svg_version.svg"
+        },
+        {
+          name: "Flask",
+          logo: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Flask_logo.svg"
+        }
+      ],
+      website: "https://robin-driving-aid.com",
+      stars: 4.0
     },
   ];
 
   const playCrtSound = () => {
-    const audio = new Audio("https://freesound.org/data/previews/171/171671_1234567-lq.mp3");
-    audio.play();
+    try {
+      // Stop any currently playing audio
+      const existingAudio = document.querySelector('#crt-sound') as HTMLAudioElement;
+      if (existingAudio) {
+        existingAudio.pause();
+        existingAudio.currentTime = 0;
+      }
+
+      // Create new audio element
+      const audio = new Audio("/sounds/pass.mp3");
+      audio.id = 'crt-sound'; // Give it an ID so we can find it later
+      audio.play().catch(e => console.error("Audio play failed:", e));
+
+      // Clean up after playback
+      audio.onended = () => {
+        audio.remove();
+      };
+    } catch (e) {
+      console.error("Error playing crt sound:", e);
+    }
   };
 
   const playUnlockSound = () => {
@@ -91,7 +196,7 @@ export function Projects() {
         existingAudio.currentTime = 0;
         existingAudio.remove();
       }
-  
+
       const audio = new Audio("/sounds/correct.mp3");
       audio.id = 'correct-sound';
       audio.play().catch(e => console.error("Audio play failed:", e));
@@ -109,12 +214,12 @@ export function Projects() {
         existingAudio.pause();
         existingAudio.currentTime = 0;
       }
-  
+
       // Create new audio element
       const audio = new Audio("/sounds/wrong.mp3");
       audio.id = 'wrong-sound'; // Give it an ID so we can find it later
       audio.play().catch(e => console.error("Audio play failed:", e));
-      
+
       // Clean up after playback
       audio.onended = () => {
         audio.remove();
@@ -132,12 +237,12 @@ export function Projects() {
         existingAudio.pause();
         existingAudio.currentTime = 0;
       }
-  
+
       // Create new audio element
       const audio = new Audio("/sounds/pass.mp3");
       audio.id = 'pass-sound'; // Give it an ID so we can find it later
       audio.play().catch(e => console.error("Audio play failed:", e));
-      
+
       // Clean up after playback
       audio.onended = () => {
         audio.remove();
@@ -209,7 +314,7 @@ export function Projects() {
     } else if (currentQuestion.category === "Tech") {
       joke = "Tech questions can be hard to process. Maybe you need to upgrade your knowledge RAM!";
     }
-    
+
     setFeedback({ type: "pass", message: joke });
     playPassSound();
     setTimeout(() => {
@@ -220,29 +325,29 @@ export function Projects() {
   return (
     <section id="projects" className="relative py-20 overflow-hidden">
       {/* Background Images */}
-            <div className="absolute inset-0">
-              <div className="dark:block hidden">
-                <Image
-                  src="/chalkboard.jpg"
-                  alt="Technology background"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-[#000d14]/80"></div>
-              </div>
-              <div className="dark:hidden block">
-                <Image
-                  src="/scattered.svg"
-                  alt="Technology background"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-white/80"></div>
-              </div>
-            </div>
-      
+      <div className="absolute inset-0">
+        <div className="dark:block hidden">
+          <Image
+            src="/chalkboard.jpg"
+            alt="Technology background"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-[#000d14]/80"></div>
+        </div>
+        <div className="dark:hidden block">
+          <Image
+            src="/scattered.svg"
+            alt="Technology background"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-white/80"></div>
+        </div>
+      </div>
+
 
       <div className="container mx-auto px-4 relative z-10 h-full flex items-center justify-center">
         {!isUnlocked ? (
@@ -254,16 +359,16 @@ export function Projects() {
           >
             {/* Video */}
             <div className="w-64 h-64 md:w-80 md:h-80 overflow-hidden rounded-lg">
-              <video 
-                autoPlay 
-                loop 
-                muted 
+              <video
+                autoPlay
+                loop
+                muted
                 playsInline
                 className="w-full h-full object-cover"
               >
                 <source src="/videos/robot.mp4" type="video/mp4" />
               </video>
-             
+
             </div>
 
             <div className="text-center md:text-left relative">
@@ -272,13 +377,12 @@ export function Projects() {
                 <motion.div
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`mb-6 p-4 rounded-lg ${
-                    feedback.type === "correct" 
-                      ? "bg-green-500/90 text-white" 
-                      : feedback.type === "wrong" 
-                        ? "bg-red-500/90 text-white" 
-                        : "bg-yellow-500/90 text-white"
-                  }`}
+                  className={`mb-6 p-4 rounded-lg ${feedback.type === "correct"
+                    ? "bg-green-500/90 text-white"
+                    : feedback.type === "wrong"
+                      ? "bg-red-500/90 text-white"
+                      : "bg-yellow-500/90 text-white"
+                    }`}
                 >
                   <div className="flex items-center justify-center gap-2">
                     {feedback.type === "correct" ? (
@@ -289,17 +393,17 @@ export function Projects() {
                       <XCircle className="w-6 h-6" />
                     )}
                     <h3 className="text-xl font-bold">
-                      {feedback.type === "correct" 
-                        ? "Correct!" 
-                        : feedback.type === "wrong" 
-                          ? "Wrong!" 
+                      {feedback.type === "correct"
+                        ? "Correct!"
+                        : feedback.type === "wrong"
+                          ? "Wrong!"
                           : "Oops!"}
                     </h3>
                   </div>
                   <p className="mt-2">{feedback.message}</p>
                 </motion.div>
               )}
-            <p className="text-lg text-muted-foreground dark:text-white/80 mb-4">Want a taste of my creative ventures?</p>
+              <p className="text-lg text-muted-foreground dark:text-white/80 mb-4">Want a taste of my creative ventures?</p>
               <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground dark:text-white">
                 Crack up the Safe
               </h2>
@@ -310,11 +414,10 @@ export function Projects() {
                 {questions[questionIndex].options.map((option) => (
                   <label
                     key={option}
-                    className={`flex items-center gap-2 px-4 py-2 border ${
-                      selectedAnswer === option
-                        ? 'border-blue-400 bg-blue-400/30'
-                        : 'border-blue-400/20 dark:border-blue-400/30 bg-blue-400/10 dark:bg-blue-400/20'
-                    } rounded-md text-foreground dark:text-white hover:bg-blue-400/30 cursor-pointer`}
+                    className={`flex items-center gap-2 px-4 py-2 border ${selectedAnswer === option
+                      ? 'border-blue-400 bg-blue-400/30'
+                      : 'border-blue-400/20 dark:border-blue-400/30 bg-blue-400/10 dark:bg-blue-400/20'
+                      } rounded-md text-foreground dark:text-white hover:bg-blue-400/30 cursor-pointer`}
                   >
                     <input
                       type="radio"
@@ -338,7 +441,7 @@ export function Projects() {
           </motion.div>
         ) : (
           <motion.div
-            className="w-full max-w-5xl"
+            className="w-full "
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
@@ -372,22 +475,20 @@ export function Projects() {
                 {projects.map((project, index) => (
                   <motion.div
                     key={project.id}
-                    className={`flex-shrink-0 w-full md:w-1/3 snap-center terminal-window relative ${
-                      index === currentIndex ? "scale-105 z-10" : "scale-95 opacity-80"
-                    }`}
+                    className={`flex-shrink-0 w-full md:w-1/4 snap-center terminal-window relative ${index === currentIndex ? "scale-105 z-10" : "scale-95 opacity-80"
+                      }`}
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
                     onHoverStart={() => {
                       setHoveredCard(project.id);
-                      playCrtSound();
+                      {/* playCrtSound(); */ }
                     }}
                     onHoverEnd={() => setHoveredCard(null)}
                   >
                     <div
-                      className={`absolute inset-0 bg-[url('https://cdn.pixabay.com/photo/2016/11/29/09/16/monitor-1867755_1280.jpg')] bg-cover opacity-0 transition-opacity duration-300 ${
-                        hoveredCard === project.id ? "opacity-20 animate-scanline" : ""
-                      }`}
+                      className={`absolute inset-0 bg-[url('/headphones.jpg')] bg-cover opacity-0 transition-opacity duration-300 ${hoveredCard === project.id ? "opacity-20 animate-scanline" : ""
+                        }`}
                     />
                     <div className="terminal-header">
                       <div className="terminal-button terminal-button-close" />
@@ -406,10 +507,50 @@ export function Projects() {
                         className="w-full h-32 object-cover mb-4 rounded-md"
                       />
                       <p className="mb-4 text-muted-foreground dark:text-white/80">{project.description}</p>
-                      <div className="mb-4 text-muted-foreground dark:text-white/80">
-                        <p>Coffee cups: {project.stats.coffee}</p>
-                        <p>Quirk: {project.stats.quirk}</p>
-                        <p>Victory: {project.stats.victory}</p>
+                      <div className="mb-4 flex items-center gap-1 text-muted-foreground dark:text-white/80">
+                        <span>Rating: {project.stars} / 5</span>
+                        {/* Optional: Add a star icon component here, e.g., <Star className="w-4 h-4" /> */}
+                      </div>
+                      <div className="mb-4 flex flex-wrap gap-2">
+                        {project.stackLogos.map((tech, idx) => (
+                          <Image
+                            key={idx}
+                            src={tech.logo}
+                            alt={`${tech.name} Logo`}
+                            width={24}
+                            height={24}
+                            className="object-contain"
+                          />
+                        ))}
+                      </div>
+                      <div className="mb-4 flex gap-1 text-yellow-500 dark:text-yellow-400">
+                        {(() => {
+                          const fullStars = Math.floor(project.stars); // Number of full stars
+                          const hasHalfStar = project.stars % 1 >= 0.5; // Check for half star
+                          const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0); // Remaining empty stars
+
+                          return (
+                            <>
+                              {Array(fullStars).fill(null).map((_, i) => (
+                                <span key={`full-${i}`} className="text-xl">★</span>
+                              ))}
+                              {hasHalfStar && (
+                                <span className="text-xl relative inline-block w-5 h-5">
+                                  <span className="absolute inset-0 text-gray-300 dark:text-gray-600">★</span>
+                                  <span
+                                    className="absolute inset-0 text-yellow-500 dark:text-yellow-400 overflow-hidden"
+                                    style={{ width: "50%" }}
+                                  >
+                                    ★
+                                  </span>
+                                </span>
+                              )}
+                              {Array(emptyStars).fill(null).map((_, i) => (
+                                <span key={`empty-${i}`} className="text-xl text-gray-300 dark:text-gray-600">★</span>
+                              ))}
+                            </>
+                          );
+                        })()}
                       </div>
                       <div className="flex flex-col gap-2">
                         {project.github && (
