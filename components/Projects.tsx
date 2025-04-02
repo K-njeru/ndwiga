@@ -51,7 +51,6 @@ export function Projects() {
         }
       ],
       website: "https://crank-arts.vercel.app/",
-      github: "https://github.com/yourusername/code-telegraph", // Note: This seems misplaced; update if needed
       stars: 4.5
     },
     {
@@ -155,7 +154,7 @@ export function Projects() {
           logo: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Flask_logo.svg"
         }
       ],
-      website: "https://robin-driving-aid.com",
+      github: "https://github.com/yourusername/code-telegraph", 
       stars: 4.0
     },
   ];
@@ -441,7 +440,7 @@ export function Projects() {
           </motion.div>
         ) : (
           <motion.div
-            className="w-full "
+            className="w-full max-w-7xl"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
@@ -507,10 +506,6 @@ export function Projects() {
                         className="w-full h-32 object-cover mb-4 rounded-md"
                       />
                       <p className="mb-4 text-muted-foreground dark:text-white/80">{project.description}</p>
-                      <div className="mb-4 flex items-center gap-1 text-muted-foreground dark:text-white/80">
-                        <span>Rating: {project.stars} / 5</span>
-                        {/* Optional: Add a star icon component here, e.g., <Star className="w-4 h-4" /> */}
-                      </div>
                       <div className="mb-4 flex flex-wrap gap-2">
                         {project.stackLogos.map((tech, idx) => (
                           <Image
