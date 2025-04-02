@@ -65,7 +65,11 @@ export function Projects() {
       title: "Neon Compiler",
       description: "A special tool that turns ideas into retro-style code.",
       image: "https://cdn.pixabay.com/photo/2016/11/19/14/00/neon-1839407_1280.jpg",
-      stats: { lines: "6,000", coffee: "25 cups", days: "90" },
+      stats: {
+        coffee: "25 cups",
+        quirk: "Coded in pajamas",
+        victory: "Retro vibes nailed"
+      }
     },
   ];
 
@@ -403,9 +407,9 @@ export function Projects() {
                       />
                       <p className="mb-4 text-muted-foreground dark:text-white/80">{project.description}</p>
                       <div className="mb-4 text-muted-foreground dark:text-white/80">
-                        <p>Code Lines: {project.stats.lines}</p>
-                        <p>Coffee Cups: {project.stats.coffee}</p>
-                        <p>Days Worked: {project.stats.days}</p>
+                        <p>Coffee cups: {project.stats.coffee}</p>
+                        <p>Quirk: {project.stats.quirk}</p>
+                        <p>Victory: {project.stats.victory}</p>
                       </div>
                       <div className="flex flex-col gap-2">
                         {project.github && (
