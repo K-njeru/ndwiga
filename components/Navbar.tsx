@@ -9,7 +9,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Image } from '@radix-ui/react-avatar';
+import  Image  from 'next/image';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
