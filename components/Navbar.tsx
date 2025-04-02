@@ -9,6 +9,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { Image } from '@radix-ui/react-avatar';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,8 +35,8 @@ export function Navbar() {
               >
                 {/* Circular Logo Image */}
                 <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
-                  <img
-                    src="/kennedy.jpeg"
+                  <Image
+                    src="/Kennedy.jpeg"
                     alt="Portfolio Logo"
                     className="w-full h-full object-cover"
                   />
