@@ -38,7 +38,8 @@ export function Navbar() {
                   <Image
                     src="/Kennedy.jpeg"
                     alt="Portfolio Logo"
-                    className="w-full h-full object-cover"
+                    fill
+                    className="rounded-full object-cover"
                   />
                 </div>
 

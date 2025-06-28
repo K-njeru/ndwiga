@@ -16,8 +16,12 @@ const josefinSans = Josefin_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Portfolio - Adventure & Developer Mode',
-  description: 'A unique portfolio website with Adventure and Developer modes',
+  title: 'Kennedy Njeru',
+  description: 'My unique portfolio website with Adventure and Developer modes.',
+   icons: {
+    icon: '/Kennedy-modified.png', // Path to my favicon (in `/public`)
+    apple: '/Kennedy-modified.png', // Apple touch icon
+  },
 };
 
 export default function RootLayout({
