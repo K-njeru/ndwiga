@@ -37,7 +37,7 @@ export function Navbar() {
                 <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
                   <Image
                     src="/Kennedy.jpeg"
-                    alt="Portfolio Logo"
+                    alt="Portfolio Log"
                     fill
                     className="rounded-full object-cover"
                   />
